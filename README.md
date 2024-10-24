@@ -1142,4 +1142,382 @@ Here are some **one-liner questions, fill-in-the-blanks, and simple definition-b
 
 ---
 
-These questions cover a mix of **definitions**, **basic Python syntax**, and **common operations**, which are often asked in multiple-choice or short-answer format.
+Here's a comprehensive **Python exam** based on your syllabus, class notes, labs, and probable questions that could appear in the exam. I'll break it down into multiple sections, including **multiple choice questions (MCQs)**, **short answer questions**, **code-based problems**, and **test-driven development (pytest)** questions.
+
+---
+
+### **Python Exam**
+
+#### **Part 1: Multiple Choice Questions (MCQs)**
+
+1. **What is the output of the following code?**  
+   ```python
+   x = "Python"
+   print(x[::-1])
+   ```
+   - a) `nohtyP`
+   - b) `Python`
+   - c) `thonPy`
+   - d) `Error`
+   - **Answer**: a) `nohtyP`
+
+2. **Which of the following is used to handle exceptions in Python?**
+   - a) `try`
+   - b) `except`
+   - c) `raise`
+   - d) All of the above
+   - **Answer**: d) All of the above
+
+3. **What is the correct syntax to create a class in Python?**
+   - a) `class MyClass:`
+   - b) `def MyClass:`
+   - c) `create class MyClass:`
+   - d) `new MyClass:`
+   - **Answer**: a) `class MyClass:`
+
+4. **What is the output of the following code?**  
+   ```python
+   x = [1, 2, 3, 4, 5]
+   print(x[1:3])
+   ```
+   - a) `[1, 2, 3]`
+   - b) `[2, 3]`
+   - c) `[1, 2]`
+   - d) `Error`
+   - **Answer**: b) `[2, 3]`
+
+5. **Which of the following methods can be used to add an element to a set?**
+   - a) `add()`
+   - b) `append()`
+   - c) `insert()`
+   - d) `extend()`
+   - **Answer**: a) `add()`
+
+---
+
+#### **Part 2: Fill-in-the-Blanks**
+
+1. **Fill in the blank:** The keyword `__________` is used to check if a value exists in a sequence (like a list or tuple).  
+   **Answer**: `in`
+
+2. **Fill in the blank:** A `__________` is a function inside a class that initializes the attributes of an object.  
+   **Answer**: `__init__` (constructor)
+
+3. **Fill in the blank:** The `__________` keyword is used to create a function in Python.  
+   **Answer**: `def`
+
+4. **Fill in the blank:** Python’s `__________` method can be used to convert a string into an integer.  
+   **Answer**: `int()`
+
+---
+
+#### **Part 3: Short Answer Questions**
+
+1. **What is a lambda function? Provide an example.**  
+   **Answer**: A lambda function is an anonymous function in Python defined using the `lambda` keyword. It can have any number of arguments but only one expression.  
+   **Example**:  
+   ```python
+   square = lambda x: x * x
+   print(square(5))  # Output: 25
+   ```
+
+2. **What is the difference between a list and a tuple in Python?**  
+   **Answer**: A list is mutable (can be modified after creation), whereas a tuple is immutable (cannot be modified after creation). Lists are defined using square brackets `[]`, and tuples are defined using parentheses `()`.
+
+3. **What is the purpose of the `self` parameter in Python classes?**  
+   **Answer**: The `self` parameter represents the instance of the class and is used to access attributes and methods within the class. It must be the first parameter of any method in the class.
+
+4. **What does the `pass` statement do in Python?**  
+   **Answer**: The `pass` statement is a placeholder and does nothing. It is used when a statement is required syntactically but no action is needed.
+
+5. **What is the difference between `==` and `is` in Python?**  
+   **Answer**: `==` checks for value equality (whether two objects have the same value), while `is` checks for object identity (whether two objects are the same in memory).
+
+---
+
+#### **Part 4: Coding Questions**
+
+1. **Write a Python function to reverse a string.**
+   ```python
+   def reverse_string(s):
+       return s[::-1]
+   
+   # Test case
+   print(reverse_string("hello"))  # Output: 'olleh'
+   ```
+
+2. **Write a Python class `Circle` with a method to calculate the area.**
+   ```python
+   import math
+   
+   class Circle:
+       def __init__(self, radius):
+           self.radius = radius
+       
+       def area(self):
+           return math.pi * self.radius ** 2
+   
+   # Test case
+   circle = Circle(5)
+   print(circle.area())  # Output: 78.53981633974483
+   ```
+
+3. **Write a Python script to raise a `ValueError` if a negative number is passed to the function.**
+   ```python
+   def check_positive(n):
+       if n < 0:
+           raise ValueError("Negative number not allowed")
+       return n
+   
+   # Test case
+   try:
+       check_positive(-5)
+   except ValueError as e:
+       print(e)  # Output: 'Negative number not allowed'
+   ```
+
+---
+
+#### **Part 5: Object-Oriented Programming (OOP) and Pytest**
+
+1. **Create a class `Person` and write a pytest function to test the object creation.**
+
+   ```python
+   # person.py
+   class Person:
+       def __init__(self, name, age):
+           self.name = name
+           self.age = age
+       
+       def greet(self):
+           return f"Hello, my name is {self.name} and I am {self.age} years old."
+   ```
+
+   ```python
+   # test_person.py
+   import pytest
+   from person import Person
+   
+   def test_person_creation():
+       p = Person("Alice", 30)
+       assert p.name == "Alice"
+       assert p.age == 30
+       assert p.greet() == "Hello, my name is Alice and I am 30 years old."
+   ```
+
+---
+
+#### **Part 6: File System Operations**
+
+1. **Write Python code to open a file, read its content, and print it line by line.**
+   ```python
+   with open('example.txt', 'r') as file:
+       for line in file:
+           print(line.strip())
+   ```
+
+2. **Write Python code to create a file and write some text into it.**
+   ```python
+   with open('output.txt', 'w') as file:
+       file.write("This is an example text.")
+   ```
+
+---
+
+#### **Part 7: HTTP Requests and BeautifulSoup**
+
+1. **Use the `httpx` library to make a GET request to an API.**
+   ```python
+   import httpx
+   
+   response = httpx.get('https://jsonplaceholder.typicode.com/posts/1')
+   print(response.json())
+   ```
+
+2. **Use BeautifulSoup to extract all quotes from a webpage (`https://quotes.toscrape.com/`).**
+   ```python
+   import httpx
+   from bs4 import BeautifulSoup
+   
+   response = httpx.get('https://quotes.toscrape.com/')
+   soup = BeautifulSoup(response.text, 'html.parser')
+   
+   quotes = soup.select('.quote')
+   for quote in quotes:
+       print(quote.find('span', class_='text').get_text())
+   ```
+
+---
+
+### **Sample Exam Problems with Solutions**
+
+1. **What will the following code output?**
+   ```python
+   for i in range(1, 4):
+       print(i ** 2, end=', ')
+   ```
+   - **Answer**: `1, 4, 9,`
+
+2. **What is the output of the following one-liner?**
+   ```python
+   print([x for x in range(5) if x % 2 == 0])
+   ```
+   - **Answer**: `[0, 2, 4]`
+
+3. **Fill in the blank:** The `__________` method in a class defines the string representation of the object.  
+   **Answer**: `__str__`
+
+4. **What is the output of this code?**
+   ```python
+   def f(x):
+       if x > 5:
+           return True
+       else:
+           return False
+   print(f(10))
+   ```
+   - **Answer**: `True`
+
+---
+
+Absolutely! Let's create a **full class** with its methods and attributes, and then write a corresponding **pytest** file that thoroughly tests the class. I'll break down everything step-by-step and cover all the essential parts.
+
+### **Class: BankAccount**
+
+This class will model a bank account, with attributes like `account_holder` and `balance`. It will have methods for depositing, withdrawing, and checking the account balance. The pytest file will include tests for all methods.
+
+---
+
+### **Step 1: Define the Class**
+
+```python
+# bank_account.py
+
+class BankAccount:
+    def __init__(self, account_holder, balance=0):
+        """
+        Initialize a BankAccount object.
+
+        Parameters:
+        account_holder (str): The name of the account holder.
+        balance (float): The starting balance. Defaults to 0.
+        """
+        self.account_holder = account_holder
+        self.balance = balance
+
+    def deposit(self, amount):
+        """
+        Deposit money into the account.
+
+        Parameters:
+        amount (float): The amount to deposit.
+        
+        Raises:
+        ValueError: If the amount is less than or equal to 0.
+        """
+        if amount <= 0:
+            raise ValueError("Deposit amount must be greater than 0.")
+        self.balance += amount
+
+    def withdraw(self, amount):
+        """
+        Withdraw money from the account.
+
+        Parameters:
+        amount (float): The amount to withdraw.
+        
+        Raises:
+        ValueError: If the amount is greater than the balance or less than 0.
+        """
+        if amount <= 0:
+            raise ValueError("Withdrawal amount must be greater than 0.")
+        if amount > self.balance:
+            raise ValueError("Insufficient balance.")
+        self.balance -= amount
+
+    def get_balance(self):
+        """
+        Returns the current balance of the account.
+        """
+        return self.balance
+
+    def __str__(self):
+        """
+        Returns a string representation of the account.
+        """
+        return f"BankAccount({self.account_holder}, balance={self.balance})"
+```
+
+---
+
+### **Step 2: Pytest for BankAccount**
+
+Next, let's write tests using **pytest** to cover all the functionality of the `BankAccount` class. These tests will verify that deposits, withdrawals, and balance checks behave as expected, including checking for errors.
+
+```python
+# test_bank_account.py
+
+import pytest
+from bank_account import BankAccount
+
+# Pytest to test the initialization of the class
+def test_initialization():
+    account = BankAccount("Alice", 100)
+    assert account.account_holder == "Alice"
+    assert account.get_balance() == 100
+
+# Pytest to test deposit functionality
+def test_deposit():
+    account = BankAccount("Bob", 50)
+    account.deposit(50)
+    assert account.get_balance() == 100
+
+# Pytest to check if deposit raises ValueError for negative amounts
+def test_deposit_negative_amount():
+    account = BankAccount("Bob", 50)
+    with pytest.raises(ValueError, match="Deposit amount must be greater than 0."):
+        account.deposit(-50)
+
+# Pytest to test withdrawal functionality
+def test_withdraw():
+    account = BankAccount("Alice", 100)
+    account.withdraw(50)
+    assert account.get_balance() == 50
+
+# Pytest to check if withdrawal raises ValueError for insufficient balance
+def test_withdraw_insufficient_balance():
+    account = BankAccount("Alice", 50)
+    with pytest.raises(ValueError, match="Insufficient balance."):
+        account.withdraw(100)
+
+# Pytest to check if withdrawal raises ValueError for negative amounts
+def test_withdraw_negative_amount():
+    account = BankAccount("Alice", 50)
+    with pytest.raises(ValueError, match="Withdrawal amount must be greater than 0."):
+        account.withdraw(-10)
+
+# Pytest to test string representation of BankAccount class
+def test_str_representation():
+    account = BankAccount("Charlie", 150)
+    assert str(account) == "BankAccount(Charlie, balance=150)"
+```
+
+---
+
+
+
+
+### **Probable Exam Questions Based on This Example**
+
+1. **Define and implement a class `BankAccount` with methods for depositing and withdrawing money. Make sure to handle invalid deposits and withdrawals.**
+   - Expected: A well-defined class with methods and error handling.
+   
+2. **Write pytest tests to verify the correctness of the `deposit()` and `withdraw()` methods of the `BankAccount` class. Ensure that the tests raise exceptions for invalid operations.**
+   - Expected: A set of pytest tests covering normal and edge cases.
+
+3. **Explain the role of the `__str__()` method in a Python class.**
+   - Answer: The `__str__()` method returns a string representation of the object, used for printing the object in a human-readable form.
+
+4. **How does pytest handle exceptions in tests, and how can you ensure an exception is raised in a specific scenario?**
+   - Answer: Pytest uses `pytest.raises()` to assert that a specific exception is raised during the execution of a code block.
+
