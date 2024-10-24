@@ -306,3 +306,840 @@ Here’s an improved version of your Python exam cheat sheet, combining detailed
   ```
 
 -
+Here is a comprehensive addition to your Python exam cheat sheet, covering **file system operations**, including explanations and examples:
+
+---
+
+### **File System Operations**
+
+Python provides several methods for interacting with the file system, primarily through the `os` and `shutil` modules for directory handling and the built-in `open()` function for file handling.
+
+#### **File Handling with `open()`**
+The `open()` function is used to open a file. You can open a file in different modes:
+
+- `'r'` (Read): Opens the file for reading.
+- `'w'` (Write): Opens the file for writing (overwrites the file if it exists).
+- `'a'` (Append): Opens the file for appending (adds data to the end).
+- `'b'` (Binary mode): Opens the file in binary mode.
+
+##### **Example: Opening and Reading a File**
+
+```python
+with open('example.txt', 'r') as file:
+    content = file.read()
+    print(content)
+```
+
+##### **Explanation**: 
+- `with open(...) as file:` is a context manager that ensures the file is properly closed after the operation is done.
+- `.read()` reads the entire content of the file.
+
+##### **Question**:
+What would happen if the file `'example.txt'` does not exist when using mode `'r'`?
+- **Answer**: A `FileNotFoundError` is raised.
+
+#### **Writing to a File**
+
+```python
+with open('example.txt', 'w') as file:
+    file.write("Hello, world!")
+```
+
+- This overwrites the file content.
+
+##### **Appending to a File**
+
+```python
+with open('example.txt', 'a') as file:
+    file.write("\nNew line appended!")
+```
+
+##### **Explanation**: The `a` mode appends data at the end of the file without overwriting existing content.
+
+---
+
+### **Working with Directories using `os` and `shutil`**
+
+#### **Creating a Directory**
+
+```python
+import os
+
+os.mkdir('new_folder')
+```
+
+##### **Explanation**: This creates a new folder named `new_folder` in the current working directory.
+
+##### **Questions**:
+1. What function would you use to create all missing intermediate directories?
+   - **Answer**: `os.makedirs('path/to/folder')`.
+
+#### **Listing Files in a Directory**
+
+```python
+files = os.listdir('folder_path')
+print(files)
+```
+
+##### **Explanation**: This lists all the files and directories within the specified folder.
+
+---
+
+### **Checking if a File Exists**
+
+```python
+import os
+
+if os.path.exists('example.txt'):
+    print('File exists!')
+else:
+    print('File not found!')
+```
+
+##### **Explanation**: `os.path.exists()` checks whether the given path exists.
+
+---
+
+### **Removing Files and Directories**
+
+- **Removing a File**: 
+  ```python
+  os.remove('example.txt')
+  ```
+
+- **Removing a Directory**: 
+  ```python
+  os.rmdir('empty_folder')
+  ```
+
+- **Removing a Directory and its Contents**:
+  ```python
+  import shutil
+  shutil.rmtree('folder_with_files')
+  ```
+
+##### **Explanation**:
+- `shutil.rmtree()` removes a directory and all its contents (files and subdirectories).
+
+##### **Questions**:
+1. What will happen if you try to remove a non-empty directory using `os.rmdir()`?
+   - **Answer**: It raises an `OSError`.
+
+---
+
+### **Common File System Errors**
+
+- **FileNotFoundError**: Raised when trying to open a file that doesn’t exist.
+- **PermissionError**: Raised when there is no permission to access the file or directory.
+- **IsADirectoryError**: Raised when a file operation is attempted on a directory.
+
+#### **Example of Handling Errors**:
+
+```python
+try:
+    with open('non_existent.txt', 'r') as file:
+        content = file.read()
+except FileNotFoundError:
+    print("File not found!")
+```
+
+---
+
+### **Example Questions Based on File System Operations**:
+
+1. **Write a Python function that creates a directory if it doesn’t exist**.
+   
+   ```python
+   def create_directory(directory_name):
+       if not os.path.exists(directory_name):
+           os.makedirs(directory_name)
+       else:
+           print("Directory already exists")
+   ```
+
+2. **What is the difference between `os.remove()` and `shutil.rmtree()`?**
+   - **Answer**: `os.remove()` deletes a single file, while `shutil.rmtree()` deletes an entire directory and all its contents.
+
+---
+
+### **Loops over Different Data Types**
+
+Python provides versatile loop constructs. Let's explore how to loop through different data types.
+
+#### **Looping through a List**:
+
+```python
+numbers = [1, 2, 3, 4, 5]
+for num in numbers:
+    print(num)
+```
+
+#### **Looping through a Dictionary**:
+
+```python
+my_dict = {'a': 1, 'b': 2, 'c': 3}
+for key, value in my_dict.items():
+    print(f'{key}: {value}')
+```
+
+#### **Looping through a String**:
+
+```python
+for char in 'hello':
+    print(char)
+```
+
+---
+
+---
+
+### **Error Raising and Handling**
+
+#### **Using `raise` to Trigger an Exception**
+
+```python
+def validate_age(age):
+    if age < 0:
+        raise ValueError("Age cannot be negative")
+    else:
+        print(f"Valid age: {age}")
+```
+
+##### **Explanation**: The `raise` keyword is used to trigger an exception manually.
+
+##### **Question**:
+How would you raise a `TypeError` for incorrect data types?
+- **Answer**: 
+
+```python
+if not isinstance(age, int):
+    raise TypeError("Age must be an integer")
+```
+
+---
+
+### **OOP and Pytest (Integrated Example)**
+
+#### **Class Definition and Unit Testing with Pytest**
+
+```python
+# class definition
+class Calculator:
+    def add(self, a, b):
+        return a + b
+
+    def subtract(self, a, b):
+        return a - b
+```
+
+#### **Unit Test for Calculator Class**:
+
+```python
+# test_calculator.py
+import pytest
+from calculator import Calculator
+
+def test_add():
+    calc = Calculator()
+    assert calc.add(2, 3) == 5
+
+def test_subtract():
+    calc = Calculator()
+    assert calc.subtract(5, 3) == 2
+```
+
+#### **Explanation**:
+- **`pytest`**: A testing framework that simplifies the creation of test cases.
+- **Fixtures**: Can be used to set up reusable test data.
+- **Mocking/Patching**: Used to simulate the behavior of objects or methods in a test.
+
+##### **Question**:
+What is the purpose of using `pytest` over `unittest`?
+- **Answer**: `pytest` has more concise syntax, allows parameterized testing, and supports advanced features like fixtures and mocks.
+
+---
+Let's add more **examples** and **probable midterm questions** based on your syllabus, covering various topics in **basic Python knowledge**, **OOP**, **unit testing with pytest**, **HTTP requests**, **web scraping**, and **file systems**.
+
+---
+
+### **Basic Python Knowledge**
+
+#### **1. Mutable vs Immutable Data Types**
+
+- **Mutable**: Objects that can be changed after creation (e.g., lists, dictionaries).
+- **Immutable**: Objects that cannot be changed once created (e.g., strings, tuples).
+
+##### **Example**:
+
+```python
+# Mutable: List
+my_list = [1, 2, 3]
+my_list[0] = 100  # modifies the first element
+print(my_list)  # Output: [100, 2, 3]
+
+# Immutable: Tuple
+my_tuple = (1, 2, 3)
+# my_tuple[0] = 100  # This would raise a TypeError since tuples are immutable
+```
+
+##### **Probable Questions**:
+1. **What is the difference between mutable and immutable objects? Give an example.**
+2. **Predict the output**:
+
+```python
+my_string = "hello"
+my_string[0] = 'H'  # What happens?
+```
+
+---
+
+### **Loops and Conditionals**
+
+#### **2. One-Liner Loop Examples**
+
+```python
+# List comprehension to create squares of numbers 0-4
+squares = [x**2 for x in range(5)]
+print(squares)  # Output: [0, 1, 4, 9, 16]
+
+# Nested list comprehension
+matrix = [[i * j for i in range(3)] for j in range(3)]
+print(matrix)
+```
+
+##### **Probable Questions**:
+1. **What is the output of the following list comprehension?**
+
+```python
+nums = [x for x in range(10) if x % 2 == 0]
+```
+
+2. **What will the following loop print?**
+
+```python
+for i in range(1, 4):
+    for j in range(i):
+        print(i * j)
+```
+
+---
+
+### **OOP Concepts**
+
+#### **3. Class, Object, Attributes, and Methods**
+
+##### **Example Class: Person**
+
+```python
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def greet(self):
+        return f"Hello, my name is {self.name} and I am {self.age} years old."
+
+# Create an object of the class
+person1 = Person("Alice", 30)
+print(person1.greet())  # Output: Hello, my name is Alice and I am 30 years old.
+```
+
+##### **Probable Questions**:
+1. **Define a class `Book` with attributes `title` and `author`. Implement a method `details()` that prints the book's information.**
+2. **What is a constructor in OOP? Why is it important?**
+
+#### **4. Dunder Methods (`__init__`, `__str__`, `__repr__`)**
+
+##### **Example**:
+
+```python
+class Car:
+    def __init__(self, make, model):
+        self.make = make
+        self.model = model
+
+    def __str__(self):
+        return f"{self.make} {self.model}"
+
+    def __repr__(self):
+        return f"Car('{self.make}', '{self.model}')"
+
+car = Car("Toyota", "Corolla")
+print(car)  # Output: Toyota Corolla
+print(repr(car))  # Output: Car('Toyota', 'Corolla')
+```
+
+##### **Probable Questions**:
+1. **Explain the difference between `__str__` and `__repr__` with examples.**
+2. **What is the output of the following code:**
+
+```python
+class Student:
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return f"Student name is {self.name}"
+
+s = Student("John")
+print(s)
+```
+
+---
+
+### **Unit Testing with `pytest`**
+
+#### **5. Writing Tests for a Simple Calculator Class**
+
+```python
+# calculator.py
+class Calculator:
+    def add(self, x, y):
+        return x + y
+
+    def subtract(self, x, y):
+        return x - y
+
+# test_calculator.py
+import pytest
+from calculator import Calculator
+
+def test_add():
+    calc = Calculator()
+    assert calc.add(3, 4) == 7
+
+def test_subtract():
+    calc = Calculator()
+    assert calc.subtract(10, 3) == 7  # Incorrect: This will fail
+```
+
+##### **Probable Questions**:
+1. **Write a pytest function to test the `add()` method in a `MathOperations` class.**
+2. **What is a fixture in pytest, and how would you use it to create reusable test objects?**
+
+#### **6. Mocking in Pytest**
+
+```python
+import pytest
+from unittest.mock import patch
+
+class ExternalAPI:
+    def fetch_data(self):
+        return "Real data"
+
+def test_fetch_data():
+    with patch.object(ExternalAPI, 'fetch_data', return_value="Mock data"):
+        api = ExternalAPI()
+        assert api.fetch_data() == "Mock data"
+```
+
+##### **Probable Questions**:
+1. **What is the purpose of mocking in pytest, and when would you use it?**
+
+---
+
+### **File System Operations**
+
+#### **7. Example of File Reading and Writing**
+
+##### **Reading a File**:
+
+```python
+with open('data.txt', 'r') as file:
+    content = file.read()
+    print(content)
+```
+
+##### **Writing to a File**:
+
+```python
+with open('output.txt', 'w') as file:
+    file.write("This is the output text.")
+```
+
+##### **Probable Questions**:
+1. **What is the difference between `r+`, `w+`, and `a+` modes in file handling?**
+2. **Write a Python program that reads from one file and writes to another.**
+
+---
+
+### **Making HTTP Requests with `httpx`**
+
+#### **8. Sending GET Requests**
+
+```python
+import httpx
+
+response = httpx.get('https://api.github.com')
+print(response.status_code)
+print(response.json())  # Parse JSON response
+```
+
+##### **Probable Questions**:
+1. **Write a Python function to make a GET request to a given URL and return the response status code.**
+2. **What method in `httpx` would you use to send POST data?**
+
+---
+
+### **Web Scraping with BeautifulSoup**
+
+#### **9. Extracting Data from HTML**
+
+##### **Example**:
+
+```python
+import httpx
+from bs4 import BeautifulSoup
+
+url = "https://quotes.toscrape.com/"
+response = httpx.get(url)
+soup = BeautifulSoup(response.text, 'html.parser')
+
+# Finding all quote elements
+quotes = soup.find_all('span', class_='text')
+for quote in quotes:
+    print(quote.text)
+```
+
+##### **Explanation**:
+- **`find_all()`**: Finds all elements matching the tag and class.
+- **`text`**: Extracts text content from HTML.
+
+##### **Probable Questions**:
+1. **Explain how `find()` and `find_all()` work in BeautifulSoup with an example.**
+2. **Write a Python script to scrape and print all the quotes from a webpage using BeautifulSoup.**
+
+---
+
+### **Advanced File System Operations**
+
+#### **10. Handling File Paths and Directories**
+
+```python
+import os
+
+# Create a directory
+os.makedirs('my_folder', exist_ok=True)
+
+# Check if a path exists
+if os.path.exists('my_folder'):
+    print('Directory exists')
+
+# Remove a directory
+os.rmdir('my_folder')
+```
+
+##### **Probable Questions**:
+1. **What is the purpose of `os.makedirs()` vs `os.mkdir()`?**
+2. **How would you check if a file exists before attempting to open it?**
+
+#### **Example**:
+
+```python
+import os
+
+if os.path.exists('example.txt'):
+    with open('example.txt', 'r') as file:
+        content = file.read()
+    print(content)
+else:
+    print('File not found')
+```
+
+---
+
+### **Error Handling**
+
+#### **11. Raising Custom Errors**
+
+```python
+def divide(x, y):
+    if y == 0:
+        raise ValueError("Cannot divide by zero!")
+    return x / y
+
+try:
+    divide(10, 0)
+except ValueError as e:
+    print(e)  # Output: Cannot divide by zero!
+```
+
+Here are the **solutions** for the practice questions I shared earlier:
+
+---
+
+### **1. OOP Question**
+
+**Problem**: Define a `BankAccount` class with attributes `balance` and `account_holder`. Write methods to deposit and withdraw money, ensuring the balance doesn't go negative.
+
+**Solution**:
+
+```python
+class BankAccount:
+    def __init__(self, account_holder, balance=0):
+        self.account_holder = account_holder
+        self.balance = balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.balance += amount
+            print(f"Deposited {amount}, new balance is {self.balance}")
+        else:
+            print("Deposit amount must be positive.")
+
+    def withdraw(self, amount):
+        if 0 < amount <= self.balance:
+            self.balance -= amount
+            print(f"Withdrew {amount}, remaining balance is {self.balance}")
+        else:
+            print("Insufficient balance or invalid amount.")
+            
+# Example usage
+account = BankAccount("Alice", 100)
+account.deposit(50)  # Deposited 50, new balance is 150
+account.withdraw(30) # Withdrew 30, remaining balance is 120
+account.withdraw(200) # Insufficient balance or invalid amount.
+```
+
+---
+
+### **2. File Handling**
+
+**Problem**: Write a Python script that reads a file, counts the number of lines, and writes the count to another file.
+
+**Solution**:
+
+```python
+# Assuming input file is 'input.txt' and output file is 'output.txt'
+
+def count_lines(input_file, output_file):
+    try:
+        with open(input_file, 'r') as infile:
+            lines = infile.readlines()
+            line_count = len(lines)
+
+        with open(output_file, 'w') as outfile:
+            outfile.write(f"Number of lines: {line_count}\n")
+
+        print(f"Line count ({line_count}) has been written to {output_file}")
+
+    except FileNotFoundError:
+        print("The file was not found.")
+
+# Example usage
+count_lines('input.txt', 'output.txt')
+```
+
+---
+
+### **3. Web Scraping**
+
+**Problem**: Using BeautifulSoup, write a script that extracts and prints all the URLs from a webpage.
+
+**Solution**:
+
+```python
+import httpx
+from bs4 import BeautifulSoup
+
+def extract_urls(url):
+    response = httpx.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    # Find all anchor tags <a> and extract href attribute
+    links = soup.find_all('a', href=True)
+    for link in links:
+        print(link['href'])
+
+# Example usage
+extract_urls("https://quotes.toscrape.com")
+```
+
+---
+
+### **4. Unit Testing**
+
+**Problem**: Write a pytest test function to test the withdrawal method of a `BankAccount` class, ensuring it raises an error if withdrawal exceeds balance.
+
+**Solution**:
+
+```python
+import pytest
+from bank_account import BankAccount  # Assuming the class is in a file called bank_account.py
+
+def test_withdraw_insufficient_balance():
+    account = BankAccount("Alice", 100)
+    
+    with pytest.raises(ValueError, match="Insufficient balance or invalid amount."):
+        account.withdraw(200)  # Trying to withdraw more than balance
+```
+
+---
+
+### **5. HTTP Requests**
+
+**Problem**: Write a Python function to make a GET request to a given URL and return the response status code.
+
+**Solution**:
+
+```python
+import httpx
+
+def get_status_code(url):
+    try:
+        response = httpx.get(url)
+        return response.status_code
+    except httpx.RequestError as e:
+        print(f"An error occurred while requesting {e.request.url!r}")
+        return None
+
+# Example usage
+status_code = get_status_code('https://api.github.com')
+print(f"Status Code: {status_code}")  # Output: Status Code: 200
+```
+
+---
+Here are some **one-liner questions, fill-in-the-blanks, and simple definition-based multiple-choice questions** for your Python exam:
+
+---
+
+### **One-Liner/Fill-in-the-Blank Questions**
+
+1. **Question**: Fill in the blank:  
+   Python uses the `__________` keyword to create a class.  
+   **Answer**: `class`
+
+2. **Question**: Fill in the blank:  
+   The `__________` method is called when an object is created in Python.  
+   **Answer**: `__init__`
+
+3. **Question**: Fill in the blank:  
+   A dictionary is defined using `{}` and stores data in ____________ pairs.  
+   **Answer**: `key-value`
+
+4. **Question**: Fill in the blank:  
+   The function `len()` returns the __________ of a string, list, tuple, or dictionary.  
+   **Answer**: `length`
+
+5. **Question**: Fill in the blank:  
+   In Python, the `__________` function is used to get user input from the console.  
+   **Answer**: `input()`
+
+6. **Question**: Fill in the blank:  
+   To handle exceptions in Python, we use the `__________` and `__________` blocks.  
+   **Answer**: `try`, `except`
+
+7. **Question**: Fill in the blank:  
+   A `for` loop in Python is often used to iterate over a __________.  
+   **Answer**: `sequence` (like a list, tuple, or string)
+
+8. **Question**: Fill in the blank:  
+   The `__________` keyword is used to check if a value exists in a list or tuple.  
+   **Answer**: `in`
+
+9. **Question**: Fill in the blank:  
+   Python’s `__________` function is used to check the data type of a variable.  
+   **Answer**: `type()`
+
+10. **Question**: Fill in the blank:  
+   To stop a loop prematurely, you use the `__________` statement.  
+   **Answer**: `break`
+
+---
+
+### **Multiple Choice (MCQs)**
+
+1. **Question**: What is the output of `3 * 'Python'`?
+   - a) `'Python'`
+   - b) `TypeError`
+   - c) `'PythonPythonPython'`
+   - d) `3`
+   - **Answer**: c) `'PythonPythonPython'`
+
+2. **Question**: Which of the following is used to define a function in Python?
+   - a) `def`
+   - b) `func`
+   - c) `lambda`
+   - d) `class`
+   - **Answer**: a) `def`
+
+3. **Question**: Which method is used to add an item to a list?
+   - a) `append()`
+   - b) `add()`
+   - c) `insert()`
+   - d) `extend()`
+   - **Answer**: a) `append()`
+
+4. **Question**: What is the output of `print(2 ** 3)`?
+   - a) `5`
+   - b) `6`
+   - c) `8`
+   - d) `9`
+   - **Answer**: c) `8`
+
+5. **Question**: What will be the output of the following code:  
+   `x = [1, 2, 3]`  
+   `print(x[1])`
+   - a) `1`
+   - b) `2`
+   - c) `3`
+   - d) `IndexError`
+   - **Answer**: b) `2`
+
+6. **Question**: Which operator is used to check if two values are equal?
+   - a) `=`
+   - b) `==`
+   - c) `!=`
+   - d) `<>`
+   - **Answer**: b) `==`
+
+7. **Question**: Which of the following is **not** a valid Python data type?
+   - a) `list`
+   - b) `tuple`
+   - c) `dict`
+   - d) `array`
+   - **Answer**: d) `array`
+
+8. **Question**: What will be the output of `bool(0)`?
+   - a) `True`
+   - b) `False`
+   - c) `0`
+   - d) `None`
+   - **Answer**: b) `False`
+
+9. **Question**: Which of the following can be used to open a file in write mode?
+   - a) `'r'`
+   - b) `'w'`
+   - c) `'x'`
+   - d) `'a'`
+   - **Answer**: b) `'w'`
+
+10. **Question**: How do you raise an exception in Python?
+    - a) `throw`
+    - b) `raise`
+    - c) `catch`
+    - d) `try`
+    - **Answer**: b) `raise`
+
+---
+
+### **Short Answer Questions**
+
+1. **Question**: What is a lambda function in Python?  
+   **Answer**: A lambda function is an anonymous function defined using the `lambda` keyword. It can have any number of arguments but only one expression. Example: `lambda x: x + 2`.
+
+2. **Question**: What is the difference between a list and a tuple in Python?  
+   **Answer**: A list is mutable (can be changed after creation), whereas a tuple is immutable (cannot be changed after creation).
+
+3. **Question**: What is the purpose of the `__init__` method in Python?  
+   **Answer**: The `__init__` method is a constructor used to initialize an object’s attributes when a new instance of a class is created.
+
+4. **Question**: What does the `pass` statement do in Python?  
+   **Answer**: The `pass` statement is a placeholder in Python, used when a statement is required syntactically, but no action is needed.
+
+5. **Question**: What does the `with` statement do when working with file handling in Python?  
+   **Answer**: The `with` statement simplifies file handling by automatically closing the file after the block of code is executed, even if an exception occurs.
+
+---
+
+These questions cover a mix of **definitions**, **basic Python syntax**, and **common operations**, which are often asked in multiple-choice or short-answer format.
